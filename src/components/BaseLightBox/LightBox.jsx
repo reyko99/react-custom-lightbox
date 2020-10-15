@@ -1,4 +1,10 @@
-import React, { createContext, useCallback, useState } from "react";
+import React, {
+  useRef,
+  createContext,
+  useCallback,
+  useState,
+  useEffect
+} from "react";
 import "./style.css";
 
 const LightBoxContext = createContext();
@@ -21,6 +27,7 @@ export const LightBox = ({
   selectedIndex = 0,
   children
 }) => {
+  const backdropRef = useRef(null);
   const [state, setState] = useState({
     currentIndex: selectedIndex,
     card:
@@ -57,7 +64,11 @@ export const LightBox = ({
     },
     [toggle]
   );
-
+  useEffect(() => {
+    if (backdropRef && backdropRef.current) {
+      backdropRef.current.focus();
+    }
+  }, []);
   const handleBackDropClick = useCallback(() => {
     if (closeOnBackgroundClick) {
       toggle(false);
@@ -65,12 +76,14 @@ export const LightBox = ({
   }, [closeOnBackgroundClick, toggle]);
   //handling keyboard keys
   const handleKeyDown = (evt) => {
-    console.log("left", evt);
-    if (evt.keyDown === "arrowLeft") {
-      console.log("left", evt);
+    if (evt.key === "ArrowLeft") {
+      previousAction();
     }
-    if (evt.key === "arrowRight") {
-      console.log("right");
+    if (evt.key === "ArrowRight") {
+      nextAction();
+    }
+    if (evt.key === "Escape") {
+      toggle(false);
     }
   };
   return (
@@ -78,9 +91,11 @@ export const LightBox = ({
       value={{ nextAction, previousAction, closeAction, state }}
     >
       <div
+        ref={backdropRef}
         className={"backdrop"}
         onClick={handleBackDropClick}
         onKeyDown={handleKeyDown}
+        tabIndex={0}
       >
         {children}
       </div>
@@ -97,7 +112,6 @@ export const PreviousButton = ({ children }) => {
   const { previousAction, state } = useLightBoxContext();
   return children({ action: previousAction, state });
 };
-
 
 export const ContentBox = ({ children }) => {
   const { state } = useLightBoxContext();

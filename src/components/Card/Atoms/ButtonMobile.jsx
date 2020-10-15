@@ -1,4 +1,6 @@
 import React from "react";
+import "./styles.css";
+
 
 export const ButtonMobile = ({ action, direction = "left" }) => {
   return (

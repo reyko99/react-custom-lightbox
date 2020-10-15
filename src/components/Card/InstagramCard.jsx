@@ -19,18 +19,20 @@ const ButtonsLayout = ({ size, nextAction, previousAction }) => {
   );
 };
 
-export const InstagramCard = ({ children, showButtons = false, ...props }) => {
+export const InstagramCard = ({
+  children,
+  data = {},
+  showButtons = false,
+  closeAction = () => {},
+  nextAction = () => {},
+  previousAction = () => {},
+  ...props
+}) => {
   const size = useGetSize();
-  const {
-    state: { card },
-    closeAction,
-    nextAction,
-    previousAction
-  } = useLightBoxContext();
 
   return (
     <Card {...props}>
-      <CardImage image={card.image} altText={card.altText}>
+      <CardImage image={data.image} altText={data.altText}>
         {showButtons && (
           <ButtonsLayout
             nextAction={nextAction}
@@ -46,7 +48,12 @@ export const InstagramCard = ({ children, showButtons = false, ...props }) => {
           }!important`
         }}
       >
-        {children}
+        <div className="g-container">
+          <div className="g-header">Header</div>
+          <div className="g-date">Date</div>
+          <div className="g-content">Content </div>
+          <div className="g-footer">Footer </div>
+        </div>
       </CardText>
       <CloseButton action={closeAction} />
     </Card>

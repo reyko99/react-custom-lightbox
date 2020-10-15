@@ -38,14 +38,9 @@ export default function App() {
             </PreviousButton>
           )}
           <ContentBox>
-            <InstagramCard>
-              <div className="grid-con">
-                <div className="g-header">Header</div>
-                <div className="g-date">Date</div>
-                <div className="g-content">Content </div>
-                <div className="g-footer">Footer </div>
-              </div>
-            </InstagramCard>
+            <InstagramCard showButtons={true} data={cardData[0]}/>
+           
+            
           </ContentBox>
           {size.width > 550 && (
             <NextButton>
