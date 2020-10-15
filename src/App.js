@@ -5,30 +5,11 @@ import {
   NextButton,
   PreviousButton
 } from "./components/BaseLightBox";
-import { InstagramCard } from "./components/CardsLayouts";
+import { InstagramCard } from "./components/Card";
 import { useGetSize } from "./hooks/getSizeHook";
-import "./styles.css";
 
-const cardData = [
-  {
-    id: 1,
-    image:
-      "https://res.cloudinary.com/dakp804eh/image/upload/c_fit,w_838/v1589816025/widgets/hotels/architecture-blue-water-buildings-business-261102.jpg",
-    altText: "Hello Miami"
-  },
-  {
-    id: 2,
-    image:
-      "https://res.cloudinary.com/dakp804eh/image/upload/c_fit,w_838/v1589815998/widgets/hotels/beach-blue-clouds-coconut-trees-594077.jpg",
-    altText: "Hello Hawai"
-  },
-  {
-    id: 3,
-    image:
-      "https://res.cloudinary.com/dakp804eh/image/upload/c_fit,w_838/v1589815969/widgets/hotels/body-of-water-near-buildings-1134176.jpg",
-    altText: "Hello Fiji"
-  }
-];
+import cardData from "./data.json";
+
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
   const size = useGetSize();
@@ -57,7 +38,14 @@ export default function App() {
             </PreviousButton>
           )}
           <ContentBox>
-            <InstagramCard />
+            <InstagramCard>
+              <div className="grid-con">
+                <div className="g-header">Header</div>
+                <div className="g-date">Date</div>
+                <div className="g-content">Content </div>
+                <div className="g-footer">Footer </div>
+              </div>
+            </InstagramCard>
           </ContentBox>
           {size.width > 550 && (
             <NextButton>

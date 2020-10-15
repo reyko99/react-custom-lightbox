@@ -1,0 +1,33 @@
+.grid-con {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 40px 40px auto 60px;
+  background: #4ca;
+  height: 100%;
+  width: 100%;
+}
+
+.g-header {
+  padding: 10px;
+  grid-column: 1/2;
+  grid-row: 1/1;
+  justify-content: start;
+  background-color: #c42;
+}
+.g-date {
+  padding: 10px;
+  grid-column: 1/2;
+  grid-row: 2/2;
+  background-color: #a12;
+}
+.g-content {
+  padding: 10px;
+  grid-column: 1/2;
+  grid-row: 3/3;
+}
+.g-footer {
+  padding: 10px;
+  grid-column: 1/2;
+  grid-row: 4;
+  background-color: #dc2;
+}
